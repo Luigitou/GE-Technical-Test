@@ -1,3 +1,36 @@
+body {
+    padding: 0;
+    margin: 0;
+    height: 100dvh;
+    position: relative;
+}
+
 h1 {
-    color: red;
+    text-align: center;
+    margin: 0;
+    padding: 2rem;
+}
+
+#clocks-container {
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+    flex-wrap: wrap;
+    gap: 5rem;
+}
+
+.clocks-control-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 500;
+
+    button {
+        padding: 25px;
+        border-radius: 100%;
+        aspect-ratio: 1;
+    }
 }

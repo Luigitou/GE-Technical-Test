@@ -1,5 +1,11 @@
-import './index.css';
-import { MyClass } from './example-unit';
+import "./index.css";
+import {ClockController} from "./controllers/ClockController";
+import "./utils/DragDrop";
 
-const a = new MyClass(2);
-console.log('number is', a.get());
+document.addEventListener('DOMContentLoaded', () => {
+    const clockController = ClockController.getInstance();
+
+    document.getElementById("add-clock").addEventListener("click", () => {
+        clockController.addClock();
+    });
+});
