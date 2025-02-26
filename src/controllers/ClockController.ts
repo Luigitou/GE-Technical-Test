@@ -4,10 +4,13 @@ import {ButtonView} from "../views/Buttons";
 import {EClockEditModes} from "../interfaces/IClockModel";
 import {IClockController} from "../interfaces/IClockController";
 import {TimezoneSelectorView} from "../views/TimezoneSelector";
+import {IView} from "../interfaces/IView";
+import {AnalogClockView} from "../views/Clock/AnalogClockView";
 
 type ClocksManager = {
     model: ClockModel;
-    view: ClockView;
+    view: IView;
+    isAnalog: boolean;
 }
 
 export class ClockController implements IClockController {
@@ -49,7 +52,7 @@ export class ClockController implements IClockController {
         // Clock model and view
         const clockModel = timezoneOffset ? new ClockModel(id, timezoneOffset) : new ClockModel(id);
         const clockView = new ClockView(id.toString());
-        this.clocks.push({model: clockModel, view: clockView});
+        this.clocks.push({model: clockModel, view: clockView, isAnalog: false});
         const renderData = {...clockModel.getTime(), editMode: clockModel.getEditMode()};
         clockView.render(renderData);
 
@@ -76,9 +79,12 @@ export class ClockController implements IClockController {
         new ButtonView(`wrapper-${id}`, "X", () => {
             this.deleteClock(id);
         }, "delete-button");
+        new ButtonView(`wrapper-${id}`, "Analog", () => {
+            this.toggleAnalog(id);
+        }, "analog-button");
 
         // Timezone selector
-        new TimezoneSelectorView(`${id}`, clockModel.getTimezoneOffset(), (timezone) => {
+        new TimezoneSelectorView(`wrapper-${id}`, clockModel.getTimezoneOffset(), (timezone) => {
             clockModel.setTimezoneOffset(timezone);
         });
 
@@ -100,5 +106,42 @@ export class ClockController implements IClockController {
                 clock.view.render({hours, minutes, seconds, editMode: clock.model.getEditMode()});
             })
         }, 250);
+    }
+
+    private toggleAnalog(id: number) {
+        const currentClock = this.clocks.find((clock) => clock.model.getId() === id);
+        currentClock.isAnalog = !currentClock.isAnalog;
+
+        // Clean previous clock
+        const clockElement = document.getElementById(id.toString());
+        if (clockElement) {
+            clockElement.innerHTML = "";
+        }
+
+        const buttons = document.querySelectorAll(`#wrapper-${id} button, #wrapper-${id} select`);
+        // remove clock style and delete button from the list
+        const filteredButton = Array.from(buttons).filter(btn =>
+            !btn.classList.contains("analog-button") && !btn.classList.contains("delete-button")
+        );
+
+        if (currentClock.isAnalog) {
+            // Hide buttons
+            filteredButton.forEach((button) => {
+                button.classList.add("hidden");
+            });
+
+            const analogClock = new AnalogClockView(id.toString());
+            currentClock.view = analogClock;
+            analogClock.render(currentClock.model.getTime());
+        } else {
+            // Show buttons
+            filteredButton.forEach((button) => {
+                button.classList.remove("hidden");
+            });
+
+            const digitalClock = new ClockView(id.toString());
+            currentClock.view = digitalClock;
+            digitalClock.render({...currentClock.model.getTime(), editMode: currentClock.model.getEditMode()});
+        }
     }
 }
