@@ -1,66 +1,125 @@
 .button {
     position: absolute;
-    background: darkslategrey;
-    color: white;
+    color: black;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    z-index: 10;
+    background: transparent;
+    z-index: 100;
 }
 
+.button-element {
+    background: darkslategrey;
+    display: block;
+    width: 30px;
+    height: 20px;
+    border-radius: 8px;
+}
+
+.delete-button, .analog-button {
+    position: relative;
+    border-radius: 8px;
+}
+
+.delete-button {
+    background: red;
+}
+
+.analog-button {
+    background: darkslategrey;
+}
+
+.delete-button:hover {
+    background: darkred;
+}
+
+.analog-button:hover {
+    background: black;
+}
+
+/* Clock buttons placement */
+
 .mode-button {
-    top: -15px;
-    right: -15px;
-    rotate: -45deg;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+.mode-button .button-element {
+    position: absolute;
+    left: -10px;
+    bottom: -10px;
+    rotate: 45deg;
+}
+
+.mode-button:hover .button-element {
+    background: black;
 }
 
 .increase-button {
-    bottom: -5px;
-    right: -5px;
-    rotate: 45deg;
+    bottom: 0;
+    right: 0;
+    transform: translate(50%, 50%);
 }
 
-.light-button {
-    bottom: -15px;
+.increase-button .button-element {
+    position: absolute;
     left: -15px;
+    top: -15px;
     rotate: -45deg;
 }
 
-.reset-button {
-    top: -5px;
-    left: -30px;
+.increase-button:hover .button-element {
+    background: black;
+}
+
+.light-button {
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%);
+}
+
+.light-button .button-element {
+    position: absolute;
+    right: -10px;
+    top: -10px;
     rotate: 45deg;
+}
+
+.light-button:hover .button-element {
+    background: black;
+}
+
+.reset-button {
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.reset-button .button-element {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    rotate: -45deg;
+}
+
+.reset-button:hover .button-element {
+    background: black;
 }
 
 .am-pm-button {
     top: 50%;
-    left: 95%;
-    transform: translateY(-50%);
+    right: -22%;
+    transform: translate(50%, -50%);
 }
 
-.delete-button {
-
-    top: 110%;
-    left: 75%;
-    transform: translateX(-50%);
-    background: transparent;
-    border-radius: 100%;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid red;
-    color: red;
-    width: 15px;
-    z-index: 100;
+.am-pm-button .button-element {
+    position: absolute;
+    left: -10px;
+    top: calc(50% - 9px);
+    rotate: 90deg;
 }
 
-.analog-button {
-    top: 110%;
-    left: 40%;
-    transform: translateX(-50%);
-    background: transparent;
-    color: darkslategrey;
-    border: 2px solid darkslategrey;
-    border-radius: 8px;
+.am-pm-button:hover .button-element {
+    background: black;
 }

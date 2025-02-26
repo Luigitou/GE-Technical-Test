@@ -21,6 +21,9 @@ export class ButtonView implements IView {
     }
 
     public render(): void {
-        this.element.innerHTML = this.label;
+        this.element.innerHTML = `
+        <span class="button-element"></span>
+        <span class="button-label">${this.label}</span>
+        `;
     }
 }
