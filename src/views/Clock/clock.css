@@ -2,6 +2,7 @@
     position: relative;
     width: 200px;
     aspect-ratio: 1;
+    margin: 50px;
 }
 
 .clock-display {
