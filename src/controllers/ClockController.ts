@@ -36,12 +36,24 @@ export class ClockController implements IClockController {
     public addClock(timezoneOffset?: number): void {
         const id = this.clockId++;
 
+        // Clock section wrapper
+        const clockSection = document.createElement("section");
+        clockSection.classList.add("clock-section");
+        clockSection.id = `section-${id}`;
+        this.clocksContainer.appendChild(clockSection);
+
+        // Delete & Analog buttons div
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.id = `buttons-div-${id}`;
+        buttonsDiv.classList.add("buttons-div");
+        clockSection.appendChild(buttonsDiv);
+
         // Clock wrapper to attach buttons
         const clockWrapper = document.createElement("div");
         clockWrapper.classList.add("clock-wrapper");
         clockWrapper.id = `wrapper-${id}`;
         clockWrapper.setAttribute("draggable", "true");
-        this.clocksContainer.appendChild(clockWrapper);
+        clockSection.appendChild(clockWrapper);
 
         // Clock element
         const clockElement = document.createElement("div");
@@ -76,10 +88,10 @@ export class ClockController implements IClockController {
         new ButtonView(`wrapper-${id}`, "AM/PM", () => {
             clockView.toggleAmPm();
         }, "am-pm-button");
-        new ButtonView(`wrapper-${id}`, "X", () => {
+        new ButtonView(`buttons-div-${id}`, "Delete", () => {
             this.deleteClock(id);
         }, "delete-button");
-        new ButtonView(`wrapper-${id}`, "Analog", () => {
+        new ButtonView(`buttons-div-${id}`, "Analog", () => {
             this.toggleAnalog(id);
         }, "analog-button");
 
@@ -91,7 +103,7 @@ export class ClockController implements IClockController {
     }
 
     private deleteClock(id: number) {
-        const clockElement = document.getElementById(`wrapper-${id}`);
+        const clockElement = document.getElementById(`section-${id}`);
         if (clockElement) {
             clockElement.remove();
         }
@@ -133,6 +145,12 @@ export class ClockController implements IClockController {
             const analogClock = new AnalogClockView(id.toString());
             currentClock.view = analogClock;
             analogClock.render(currentClock.model.getTime());
+
+            // Change label of the button
+            const analogButton = document.querySelector(`#buttons-div-${id} .analog-button`);
+            if (analogButton) {
+                analogButton.textContent = "Digital";
+            }
         } else {
             // Show buttons
             filteredButton.forEach((button) => {
@@ -142,6 +160,12 @@ export class ClockController implements IClockController {
             const digitalClock = new ClockView(id.toString());
             currentClock.view = digitalClock;
             digitalClock.render({...currentClock.model.getTime(), editMode: currentClock.model.getEditMode()});
+
+            // Change label of the button
+            const analogButton = document.querySelector(`#buttons-div-${id} .analog-button`);
+            if (analogButton) {
+                analogButton.textContent = "Analog";
+            }
         }
     }
 }

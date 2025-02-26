@@ -38,29 +38,23 @@
     transform: translateY(-50%);
 }
 
-.delete-button {
+.delete-button, .analog-button {
+    position: relative;
+    border-radius: 8px;
+}
 
-    top: 110%;
-    left: 75%;
-    transform: translateX(-50%);
-    background: transparent;
-    border-radius: 100%;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid red;
-    color: red;
-    width: 15px;
-    z-index: 100;
+.delete-button {
+    background: red;
 }
 
 .analog-button {
-    top: 110%;
-    left: 40%;
-    transform: translateX(-50%);
-    background: transparent;
-    color: darkslategrey;
-    border: 2px solid darkslategrey;
-    border-radius: 8px;
+    background: darkslategrey;
+}
+
+.delete-button:hover {
+    background: darkred;
+}
+
+.analog-button:hover {
+    background: black;
 }
