@@ -166,6 +166,23 @@ export class ClockController implements IClockController {
             if (analogButton) {
                 analogButton.textContent = "Analog";
             }
+
+            // Delete and rebind am/pm & light button
+            // TODO: Better option would be to have both views and to switch between them
+            const amPmButton = document.querySelector(`#wrapper-${id} .am-pm-button`);
+            if (amPmButton) {
+                amPmButton.remove();
+                new ButtonView(`wrapper-${id}`, "AM/PM", () => {
+                    digitalClock.toggleAmPm();
+                }, "am-pm-button");
+            }
+            const lightButton = document.querySelector(`#wrapper-${id} .light-button`);
+            if (lightButton) {
+                lightButton.remove();
+                new ButtonView(`wrapper-${id}`, "Light", () => {
+                    digitalClock.toggleLight();
+                }, "light-button");
+            }
         }
     }
 }
