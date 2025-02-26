@@ -10,12 +10,12 @@ export class ClockModel implements IClockModel {
     private minutesOffset: number;
     private timezoneOffset: number;
 
-    constructor(id: number) {
+    constructor(id: number, timezoneOffset?: number) {
         this.id = id;
         this.hoursOffset = 0;
         this.minutesOffset = 0;
         this.editMode = EClockEditModes.View;
-        this.timezoneOffset = this.getLocalTimezoneOffset();
+        timezoneOffset ? this.timezoneOffset = timezoneOffset : this.timezoneOffset = this.getLocalTimezoneOffset();
         this.updateTime();
     }
 
@@ -83,6 +83,7 @@ export class ClockModel implements IClockModel {
 
     private getLocalTimezoneOffset(): number {
         const currentDate = new Date();
+        console.log(currentDate.getTimezoneOffset());
         return currentDate.getTimezoneOffset() % 60;
     }
 

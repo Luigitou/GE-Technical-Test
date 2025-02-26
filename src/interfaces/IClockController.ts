@@ -8,6 +8,6 @@ export interface IClocksArray {
 
 export interface IClockController {
 
-    addClock(): void;
+    addClock(timezoneOffset?: number): void;
 
 }

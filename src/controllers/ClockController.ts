@@ -30,7 +30,7 @@ export class ClockController implements IClockController {
         return ClockController.instance;
     }
 
-    public addClock() {
+    public addClock(timezoneOffset?: number): void {
         const id = this.clockId++;
 
         // Clock wrapper to attach buttons
@@ -47,7 +47,7 @@ export class ClockController implements IClockController {
         clockWrapper.appendChild(clockElement);
 
         // Clock model and view
-        const clockModel = new ClockModel(id);
+        const clockModel = timezoneOffset ? new ClockModel(id, timezoneOffset) : new ClockModel(id);
         const clockView = new ClockView(id.toString());
         this.clocks.push({model: clockModel, view: clockView});
         const renderData = {...clockModel.getTime(), editMode: clockModel.getEditMode()};
