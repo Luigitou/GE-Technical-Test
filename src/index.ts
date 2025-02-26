@@ -1,6 +1,5 @@
 import "./index.css";
 import {ClockController} from "./controllers/ClockController";
-import "./utils/DragDrop";
 
 document.addEventListener('DOMContentLoaded', () => {
     const clockController = ClockController.getInstance();
