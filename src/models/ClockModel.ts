@@ -1,14 +1,14 @@
 import {EClockEditModes, IClockModel} from "../interfaces/IClockModel";
 
 export class ClockModel implements IClockModel {
-    id: number;
-    editMode: EClockEditModes;
-    hours: number;
-    minutes: number;
-    seconds: number;
-    hoursOffset: number;
-    minutesOffset: number;
-    timezoneOffset: number = 0;
+    private readonly id: number;
+    private editMode: EClockEditModes;
+    private hours: number;
+    private minutes: number;
+    private seconds: number;
+    private hoursOffset: number;
+    private minutesOffset: number;
+    private timezoneOffset: number;
 
     constructor(id: number) {
         this.id = id;
@@ -17,6 +17,10 @@ export class ClockModel implements IClockModel {
         this.editMode = EClockEditModes.View;
         this.timezoneOffset = this.getLocalTimezoneOffset();
         this.updateTime();
+    }
+
+    public getId(): number {
+        return this.id;
     }
 
     public incrementHours(): void {
@@ -57,7 +61,7 @@ export class ClockModel implements IClockModel {
         this.minutes = modelMinutes % 60;
 
         const modelHours = currentDate.getUTCHours() + this.hoursOffset + this.timezoneOffset + Math.floor(modelMinutes / 60);
-        this.hours = modelHours % 24;
+        this.hours = ((modelHours % 24) + 24) % 24;
     }
 
     public getTime(): { hours: number; minutes: number; seconds: number } {
@@ -71,6 +75,10 @@ export class ClockModel implements IClockModel {
 
     public setTimezoneOffset(offset: number) {
         this.timezoneOffset = offset;
+    }
+
+    public getTimezoneOffset(): number {
+        return this.timezoneOffset;
     }
 
     private getLocalTimezoneOffset(): number {

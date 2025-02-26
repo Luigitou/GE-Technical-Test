@@ -5,15 +5,8 @@ export enum EClockEditModes {
 }
 
 export interface IClockModel {
-    id: number;
-    editMode: EClockEditModes;
 
-    hours: number;
-    minutes: number;
-    seconds: number;
-
-    hoursOffset: number;
-    minutesOffset: number;
+    getId(): number;
 
     incrementHours(): void;
 
@@ -23,10 +16,14 @@ export interface IClockModel {
 
     getEditMode(): EClockEditModes;
 
-    getTime(): { hours: number; minutes: number; seconds: number; };
-
     updateTime(): void;
 
+    getTime(): { hours: number; minutes: number; seconds: number; };
+
     resetTime(): void;
+
+    setTimezoneOffset(offset: number): void;
+
+    getTimezoneOffset(): number;
 
 }

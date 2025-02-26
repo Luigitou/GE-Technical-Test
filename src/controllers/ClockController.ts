@@ -58,9 +58,9 @@ export class ClockController implements IClockController {
             clockModel.toggleEditMode();
         }, "mode-button");
         new ButtonView(`wrapper-${id}`, "+", () => {
-            if (clockModel.editMode === EClockEditModes.EditHours) {
+            if (clockModel.getEditMode() === EClockEditModes.EditHours) {
                 clockModel.incrementHours();
-            } else if (clockModel.editMode === EClockEditModes.EditMinutes) {
+            } else if (clockModel.getEditMode() === EClockEditModes.EditMinutes) {
                 clockModel.incrementMinutes();
             }
         }, "increase-button");
@@ -78,7 +78,7 @@ export class ClockController implements IClockController {
         }, "delete-button");
 
         // Timezone selector
-        new TimezoneSelectorView(`${id}`, clockModel.timezoneOffset, (timezone) => {
+        new TimezoneSelectorView(`${id}`, clockModel.getTimezoneOffset(), (timezone) => {
             clockModel.setTimezoneOffset(timezone);
         });
 
@@ -89,7 +89,7 @@ export class ClockController implements IClockController {
         if (clockElement) {
             clockElement.remove();
         }
-        this.clocks = this.clocks.filter((clock) => clock.model.id !== id);
+        this.clocks = this.clocks.filter((clock) => clock.model.getId() !== id);
     }
 
     private startClock() {
