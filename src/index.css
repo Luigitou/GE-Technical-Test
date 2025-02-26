@@ -34,3 +34,7 @@ h1 {
         aspect-ratio: 1;
     }
 }
+
+.hidden {
+    display: none;
+}

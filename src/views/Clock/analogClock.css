@@ -1,0 +1,36 @@
+.clock-screen-analog {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url("../../../watch-bg.png") no-repeat center;
+    background-size: cover;
+}
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: 50% 100%;
+    border-radius: 50% 50% 0 0;
+}
+
+.hours {
+    width: 6px;
+    height: 20%;
+    background-color: #000;
+    margin-left: -3px;
+}
+
+.minutes {
+    width: 4px;
+    height: 35%;
+    background-color: #0f0;
+    margin-left: -2px;
+}
+
+.seconds {
+    width: 2px;
+    height: 45%;
+    background-color: #f00;
+    margin-left: -1px;
+}

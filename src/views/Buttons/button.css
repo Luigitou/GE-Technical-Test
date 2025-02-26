@@ -39,9 +39,9 @@
 }
 
 .delete-button {
-    visibility: hidden;
-    top: 30px;
-    left: 50%;
+
+    top: 110%;
+    left: 75%;
     transform: translateX(-50%);
     background: transparent;
     border-radius: 100%;
@@ -55,6 +55,12 @@
     z-index: 100;
 }
 
-.clock-wrapper:hover .delete-button {
-    visibility: visible;
+.analog-button {
+    top: 110%;
+    left: 40%;
+    transform: translateX(-50%);
+    background: transparent;
+    color: darkslategrey;
+    border: 2px solid darkslategrey;
+    border-radius: 8px;
 }
