@@ -3,7 +3,7 @@ import {ClockView} from "../views/Clock";
 import {ButtonView} from "../views/Buttons";
 import {EClockEditModes} from "../interfaces/IClockModel";
 import {IClockController} from "../interfaces/IClockController";
-import {TimezoneSelectorView} from "../views/TimezoneSelector/TimezoneSelectorView";
+import {TimezoneSelectorView} from "../views/TimezoneSelector";
 
 type ClocksManager = {
     model: ClockModel;
